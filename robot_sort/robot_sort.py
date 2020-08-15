@@ -75,6 +75,37 @@ class SortingRobot:
             return -1
         else:
             return 0
+    def cycle_right(self):
+        """
+        Cycle through to the right comparing and swapping values till out of values
+        """
+        self.set_light_on()
+        while self.light_is_on() == True:
+            if self.move_right() == False:
+                self.set_light_off()
+            elif self.compare_item() == -1:
+                self.move_right()
+            elif self.compare_item() == 0:
+                self.move_right()
+            else:
+                self.swap_item()
+
+        self.cycle_left()
+
+    def cycle_left(self):
+        """
+        Cycle through to the left comparing and swapping values till out of values
+        """
+        while self.light_is_on() == False:
+            if self.move_left() == False:
+                self.set_light_on()
+            elif self.compare_item() == -1:
+                self.move_left()
+            elif self.compare_item() == 0:
+                self.move_left()
+            else:
+                self.swap_item()
+        self.cycle_right()
 
     def set_light_on(self):
         """
@@ -91,13 +122,20 @@ class SortingRobot:
         Returns True if the robot's light is on and False otherwise.
         """
         return self._light == "ON"
-
+    def sorted(self):
+        return True
     def sort(self):
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        self.cycle_right()
+        for val in self.cycle_right():
+            print(val)
+            if val != -1:
+                print(val)
+                continue
+            else:
+                break
 
 
 if __name__ == "__main__":
